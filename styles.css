@@ -1,0 +1,335 @@
+/* Estilos base */
+:root {
+  --bg: #fbf5ed;
+  --text: #3d2d25;
+  --muted: #6a5a4c;
+  --primary: #a5583f;
+  --primary-dark: #7a3f2c;
+  --surface: rgba(255, 255, 255, 0.92);
+  --border: rgba(116, 80, 65, 0.25);
+  --shadow: 0 18px 38px rgba(0, 0, 0, 0.12);
+  --radius: 18px;
+  --max-width: 1100px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: 'Crimson Text', serif;
+  color: var(--text);
+  background: linear-gradient(145deg, rgba(255, 247, 234, 1), rgba(240, 224, 206, 1));
+  background-image:
+    radial-gradient(circle at 18% 22%, rgba(212, 175, 55, 0.14) 0%, transparent 55%),
+    radial-gradient(circle at 82% 78%, rgba(165, 88, 63, 0.12) 0%, transparent 55%);
+  background-size: cover;
+  background-repeat: no-repeat;
+  line-height: 1.65;
+  animation: fadeIn 1.5s ease-in;
+}
+
+a {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.container {
+  width: min(100%, var(--max-width));
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
+.site-header {
+  padding: 4.5rem 0 3.5rem;
+  text-align: center;
+  background: rgba(255, 250, 241, 0.72);
+  border-bottom: 1px solid rgba(116, 80, 65, 0.25);
+  backdrop-filter: blur(6px);
+}
+
+.site-title {
+  margin: 0;
+  font-family: 'Dancing Script', cursive;
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  letter-spacing: -0.02em;
+  text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.site-subtitle {
+  margin: 1rem 0 1.75rem;
+  color: var(--muted);
+  font-size: 1.15rem;
+  letter-spacing: 0.02em;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  padding: 0.85rem 1.4rem;
+  border-radius: 999px;
+  border: 1px solid rgba(122, 63, 44, 0.9);
+  background: linear-gradient(135deg, rgba(165, 88, 63, 0.92), rgba(122, 63, 44, 0.92));
+  color: #fdf6f0;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.18s ease, filter 0.18s ease;
+  text-decoration: none;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.1);
+}
+
+.section {
+  padding: 4.5rem 0;
+}
+
+.section--alt {
+  background: rgba(255, 247, 235, 0.62);
+  backdrop-filter: blur(18px);
+  border-top: 1px dashed rgba(116, 80, 65, 0.3);
+  border-bottom: 1px dashed rgba(116, 80, 65, 0.3);
+}
+
+h2 {
+  font-family: "Georgia", serif;
+  font-size: 2.1rem;
+  margin-top: 0;
+  margin-bottom: 1.25rem;
+  text-align: center;
+}
+
+p {
+  margin: 0 0 1.25rem;
+}
+
+/* Alineación centrada para Contacto */
+#contacto .container {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#contacto .contact-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+#contacto .contact-list li {
+  width: fit-content;
+}
+
+/* Centrar textos en secciones clave */
+#rsvp .container > p,
+#contacto .container > p {
+  text-align: center;
+}
+
+#contacto .contact-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.card {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.94), rgba(250, 244, 238, 0.92));
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.75rem 1.5rem;
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(2px);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+}
+
+.card-icon {
+  margin-bottom: 0.5rem;
+  color: var(--primary);
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.card h3 {
+  margin-top: 0;
+}
+
+.form {
+  max-width: 600px;
+  margin: 0 auto;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2rem 1.5rem;
+  box-shadow: var(--shadow);
+}
+
+.form-row {
+  display: grid;
+  gap: 0.6rem;
+  margin-bottom: 1.25rem;
+}
+
+.form-row label {
+  font-weight: 600;
+}
+
+.form-row input,
+.form-row select,
+.form-row textarea {
+  width: 100%;
+  padding: 0.75rem 0.9rem;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  font: inherit;
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.form-row input:focus,
+.form-row select:focus,
+.form-row textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px rgba(180, 85, 160, 0.18);
+}
+
+.feedback {
+  margin-top: 1rem;
+  color: var(--primary-dark);
+  font-weight: 600;
+}
+
+.accordion {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.accordion-button {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem 1.25rem;
+  text-align: left;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.accordion-button:hover {
+  background: rgba(255, 255, 255, 1);
+}
+
+.accordion-panel {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.25s ease;
+  padding: 0 1.25rem;
+  border-left: 1px solid var(--border);
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  border-radius: 0 0 var(--radius) var(--radius);
+  background: rgba(255, 255, 255, 0.88);
+}
+
+.accordion-panel p {
+  margin: 1rem 0;
+}
+
+.accordion-button[aria-expanded="true"] .accordion-icon {
+  transform: rotate(45deg);
+}
+
+.accordion-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  color: var(--primary);
+  transition: transform 0.25s ease;
+}
+
+.contact-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.6rem;
+  justify-items: center;
+}
+
+.contact-list li {
+  display: flex;
+  gap: 0.5rem;
+  align-items: baseline;
+}
+
+.site-footer {
+  padding: 2.5rem 0;
+  text-align: center;
+  color: var(--muted);
+  border-top: 1px solid rgba(116, 80, 65, 0.25);
+  background: rgba(255, 249, 242, 0.7);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    scroll-behavior: auto !important;
+    transition: none !important;
+    animation: none !important;
+  }
+}
