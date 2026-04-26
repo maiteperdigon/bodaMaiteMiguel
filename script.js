@@ -1,6 +1,6 @@
 const form = document.getElementById("rsvp-form");
 const feedbackEl = document.getElementById("rsvp-feedback");
-const downloadBtn = document.getElementById("download-csv");
+// const downloadBtn = document.getElementById("download-csv");
 
 /*
   ↳ Guardar en Google Sheets (Drive) usando Apps Script
@@ -47,10 +47,11 @@ function storeRSVPs(list) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
 }
 
-function updateDownloadButton() {
-  const list = getStoredRSVPs();
-  downloadBtn.disabled = list.length === 0;
-}
+// function updateDownloadButton() {
+//   if (!downloadBtn) return;
+//   const list = getStoredRSVPs();
+//   downloadBtn.disabled = list.length === 0;
+// }
 
 function escapeCsv(value) {
   const str = String(value ?? "");
@@ -85,96 +86,145 @@ function buildCsv(entries) {
   return lines.join("\n");
 }
 
-function downloadCsv() {
-  const list = getStoredRSVPs();
-  if (!list.length) return;
+// function downloadCsv() {
+//   const list = getStoredRSVPs();
+//   if (!list.length) return;
 
-  const csv = buildCsv(list);
-  const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
-  const url = URL.createObjectURL(blob);
-  const link = document.createElement("a");
-  link.href = url;
-  link.download = `RSVP-boda-${new Date().toISOString().slice(0, 10)}.csv`;
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
-  URL.revokeObjectURL(url);
-}
+//   const csv = buildCsv(list);
+//   const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+//   const url = URL.createObjectURL(blob);
+//   const link = document.createElement("a");
+//   link.href = url;
+//   link.download = `RSVP-boda-${new Date().toISOString().slice(0, 10)}.csv`;
+//   document.body.appendChild(link);
+//   link.click();
+//   document.body.removeChild(link);
+//   URL.revokeObjectURL(url);
+// }
 
-form.addEventListener("submit", (event) => {
-  event.preventDefault();
-  const formData = new FormData(form);
-  const nombre = formData.get("nombre").trim();
-  const email = (formData.get("email") || "").trim();
-  const asistencia = formData.get("asistencia");
-  const transporte = formData.get("transporte");
-  const acompanante = (formData.get("acompanante") || "").trim();
-  const mensaje = (formData.get("mensaje") || "").trim();
+if (form) {
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const formData = new FormData(form);
+    const nombre = formData.get("nombre").trim();
+    const email = (formData.get("email") || "").trim();
+    const asistencia = formData.get("asistencia");
+    const transporte = formData.get("transporte");
+    const acompanante = (formData.get("acompanante") || "").trim();
+    const mensaje = (formData.get("mensaje") || "").trim();
 
-  if (!nombre || !asistencia || !transporte || !email) {
-    feedbackEl.textContent = "Por favor completa todos los campos requeridos.";
-    feedbackEl.style.color = "#d32f2f";
-    return;
-  }
+    if (!nombre || !asistencia || !transporte || !email) {
+      if (feedbackEl) {
+        feedbackEl.textContent = "Por favor completa todos los campos requeridos.";
+        feedbackEl.style.color = "#d32f2f";
+      }
+      return;
+    }
 
-  const list = getStoredRSVPs();
-  list.push({
-    timestamp: new Date().toISOString(),
-    nombre,
-    email,
-    asistencia,
-    transporte,
-    acompanante,
-    mensaje
-  });
-
-  storeRSVPs(list);
-  updateDownloadButton();
-
-  feedbackEl.textContent = "¡Gracias! Hemos recibido tu confirmación.";
-  feedbackEl.style.color = "#2e7d32";
-
-  // Si tienes una URL de Google Sheet configurada, enviamos también allí.
-  if (GOOGLE_SHEETS_URL) {
-  fetch(GOOGLE_SHEETS_URL, {
-    method: "POST",
-    body: JSON.stringify({
+    const list = getStoredRSVPs();
+    list.push({
+      timestamp: new Date().toISOString(),
       nombre,
       email,
       asistencia,
       transporte,
       acompanante,
-      mensaje,
-    }),
-  })
-  .then(r => r.text())
-  .then(console.log)
-  .catch(console.error);
+      mensaje
+    });
+
+    storeRSVPs(list);
+    // updateDownloadButton();
+
+    if (feedbackEl) {
+      feedbackEl.textContent = "¡Gracias! Hemos recibido tu confirmación.";
+      feedbackEl.style.color = "#2e7d32";
+    }
+
+    // Si tienes una URL de Google Sheet configurada, enviamos también allí.
+    if (GOOGLE_SHEETS_URL) {
+    fetch(GOOGLE_SHEETS_URL, {
+      method: "POST",
+      body: JSON.stringify({
+        nombre,
+        email,
+        asistencia,
+        transporte,
+        acompanante,
+        mensaje,
+      }),
+    })
+    .then(r => r.text())
+    .then(console.log)
+    .catch(console.error);
+  }
+
+
+    form.reset();
+  });
 }
 
-
-  form.reset();
-});
-
-downloadBtn.addEventListener("click", downloadCsv);
+// if (downloadBtn) {
+//   downloadBtn.addEventListener("click", downloadCsv);
+// }
 
 // Acordeón simple
-const accordionButtons = document.querySelectorAll(".accordion-button");
+document.addEventListener("DOMContentLoaded", () => {
+  const accordionButtons = document.querySelectorAll(".accordion-button");
 
-accordionButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    const targetId = button.dataset.target;
-    const panel = document.getElementById(targetId);
+  accordionButtons.forEach((button) => {
+    button.addEventListener("click", (event) => {
+      event.preventDefault();
 
-    const expanded = button.getAttribute("aria-expanded") === "true";
-    button.setAttribute("aria-expanded", String(!expanded));
+      const targetId = button.dataset.target;
+      const panel = document.getElementById(targetId);
 
-    if (!expanded) {
-      panel.style.maxHeight = panel.scrollHeight + "px";
-    } else {
-      panel.style.maxHeight = "0";
-    }
+      if (!panel) return;
+
+      const isExpanded = button.getAttribute("aria-expanded") === "true";
+
+      // Toggle el estado
+      button.setAttribute("aria-expanded", String(!isExpanded));
+
+      if (!isExpanded) {
+        // Abrir el panel
+        panel.classList.add("open");
+      } else {
+        // Cerrar el panel
+        panel.classList.remove("open");
+      }
+    });
   });
 });
 
-updateDownloadButton();
+// Función de cuenta atrás
+function updateCountdown() {
+  // Fecha de la boda: 12 de septiembre de 2026 a las 16:00 (hora española - CEST UTC+2)
+  const weddingDate = new Date('2026-09-12T16:00:00+02:00');
+  const now = new Date();
+  
+  const timeDifference = weddingDate - now;
+  
+  if (timeDifference > 0) {
+    const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+    
+    document.getElementById('days').textContent = days.toString().padStart(2, '0');
+    document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+    document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+    document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+  } else {
+    // Si ya pasó la fecha, mostrar 00:00:00:00
+    document.getElementById('days').textContent = '00';
+    document.getElementById('hours').textContent = '00';
+    document.getElementById('minutes').textContent = '00';
+    document.getElementById('seconds').textContent = '00';
+  }
+}
+
+// Inicializar cuenta atrás
+updateCountdown();
+setInterval(updateCountdown, 1000);
+
+// updateDownloadButton();

@@ -16,6 +16,30 @@
       </div>
     </header>
 
+    <section id="countdown" class="section">
+      <div class="container">
+        <div id="countdown-timer">
+          <div class="countdown-item">
+            <span id="days" class="countdown-number">00</span>
+            <span class="countdown-label">Días</span>
+          </div>
+          <div class="countdown-item">
+            <span id="hours" class="countdown-number">00</span>
+            <span class="countdown-label">Horas</span>
+          </div>
+          <div class="countdown-item">
+            <span id="minutes" class="countdown-number">00</span>
+            <span class="countdown-label">Minutos</span>
+          </div>
+          <div class="countdown-item">
+            <span id="seconds" class="countdown-number">00</span>
+            <span class="countdown-label">Segundos</span>
+          </div>
+        </div>
+        <p class="countdown-text">¡Faltan para nuestra boda!</p>
+      </div>
+    </section>
+
     <main>
       <section id="evento" class="section section--alt">
         <div class="container">
@@ -118,6 +142,7 @@
               <textarea id="mensaje" name="mensaje" rows="3" placeholder="Un mensaje para nosotros / información importante (alergias)"></textarea>
             </div>
             <button type="submit" class="btn-primary">Enviar confirmación</button>
+            <p id="rsvp-feedback" class="feedback" aria-live="polite"></p>
           </form>
         </div>
       </section>
@@ -141,7 +166,7 @@
         <div class="container">
           <h2>Preguntas frecuentes</h2>
           <div class="accordion">
-            <button class="accordion-button" type="button" data-target="pregunta1">
+            <button class="accordion-button" type="button" data-target="pregunta1" aria-expanded="false">
               ¿Hay estacionamiento disponible?
               <span class="accordion-icon">+</span>
             </button>
@@ -149,7 +174,7 @@
               <p>En la iglesia habrá sitio para aparcar sin problema, así que puedes llegar con tranquilidad y disfrutar el momento desde el principio. En el lugar de la fiesta el espacio es más limitado, por eso hemos organizado un servicio de transporte suave y cómodo que te llevará desde la iglesia hasta la recepción (y de regreso si lo necesitas). Si prefieres, compartir coche es siempre una forma bonita de empezar la celebración juntos.</p>
             </div>
 
-            <button class="accordion-button" type="button" data-target="pregunta2">
+            <button class="accordion-button" type="button" data-target="pregunta2" aria-expanded="false">
               ¿Hay sugerencias de regalo?
               <span class="accordion-icon">+</span>
             </button>
@@ -157,7 +182,7 @@
               <p>Lo más importante es que vengas a disfrutar con nosotros. Si quieres, puedes apoyarnos con una experiencia o contribución para nuestro hogar. Si quieres ayudarnos con un pequeño donativo aquí te dejamos el número de cuenta: ES15 0128 7820 8101 0329 0622</p>
             </div>
 
-            <button class="accordion-button" type="button" data-target="pregunta3">
+            <button class="accordion-button" type="button" data-target="pregunta3" aria-expanded="false">
               ¿Cuál es el código de vestimenta?
               <span class="accordion-icon">+</span>
             </button>
