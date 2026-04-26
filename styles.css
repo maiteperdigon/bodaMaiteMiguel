@@ -458,6 +458,176 @@ p {
   color: #fdf6f0;
 }
 
+/* Estilos para la preboda */
+#preboda .container {
+  text-align: center;
+}
+
+#preboda > .container > h2 {
+  margin-bottom: 2.5rem;
+}
+
+.preboda-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2.5rem;
+}
+
+.preboda-card {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.96), rgba(250, 244, 238, 0.94));
+  border: 2px solid rgba(165, 88, 63, 0.2);
+  border-radius: var(--radius);
+  padding: 2rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.preboda-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--primary);
+  box-shadow: 0 15px 35px rgba(165, 88, 63, 0.2);
+}
+
+.preboda-card svg {
+  margin-bottom: 1rem;
+}
+
+.preboda-card h3 {
+  color: var(--primary);
+  margin: 1rem 0 0.5rem;
+  font-size: 1.2rem;
+}
+
+.preboda-card p {
+  color: var(--muted);
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.preboda-message {
+  font-size: 1.05rem;
+  color: var(--text);
+  line-height: 1.8;
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  background: rgba(212, 175, 55, 0.08);
+  border-left: 4px solid var(--primary);
+  border-radius: 8px;
+}
+
+/* Estilos para el Timeline */
+#timeline .container {
+  max-width: 800px;
+}
+
+.timeline {
+  position: relative;
+  padding: 2rem 0;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(to bottom, var(--primary), rgba(165, 88, 63, 0.3));
+  transform: translateX(-50%);
+}
+
+.timeline-item {
+  margin-bottom: 3rem;
+  position: relative;
+  display: flex;
+  gap: 3rem;
+}
+
+.timeline-item:nth-child(odd) {
+  flex-direction: row-reverse;
+}
+
+.timeline-marker {
+  flex: 0 0 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.timeline-time {
+  background: var(--primary);
+  color: white;
+  padding: 0.75rem 1rem;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  box-shadow: 0 4px 12px rgba(165, 88, 63, 0.3);
+  position: relative;
+  z-index: 1;
+}
+
+.timeline-content {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(165, 88, 63, 0.15);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+.timeline-content:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  border-color: var(--primary);
+}
+
+.timeline-content h3 {
+  color: var(--primary);
+  margin: 0 0 0.5rem;
+  font-size: 1.15rem;
+}
+
+.timeline-content p {
+  color: var(--text);
+  margin: 0;
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+/* Responsive para móviles */
+@media (max-width: 768px) {
+  .timeline::before {
+    left: 30px;
+  }
+  
+  .timeline-item,
+  .timeline-item:nth-child(odd) {
+    flex-direction: row;
+    gap: 1.5rem;
+  }
+  
+  .timeline-marker {
+    flex: 0 0 60px;
+  }
+  
+  .timeline-time {
+    padding: 0.6rem 0.8rem;
+    font-size: 0.85rem;
+  }
+  
+  .timeline-content {
+    padding: 1rem;
+  }
+  
+  .timeline-content h3 {
+    font-size: 1rem;
+  }
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
